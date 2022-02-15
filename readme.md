@@ -1,2 +1,2 @@
-#Stopwatch with simple html,css and JavaScript
-<img src="timer.png">
+#Stopwatch with simple html,css and JavaScript /n
+<img src="./timer.png">
