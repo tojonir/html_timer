@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>timer</title>
+	<style type="text/css">
+		.container{
+			width: 40vw;
+			height: 25vw;
+			padding: 15px;
+			position: relative;
+			top:10vw;
+			left: 30vw;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		}
+		.timer{
+			position: absolute;
+			top: 0%;
+			left: 15%;
+			width: 27vw;
+			height: 4vw;
+			padding: 20px;
+			text-align: center;
+			font-size: 4vw;
+			background-color: grey;
+			color:#ffff;
+		}
+		#inputTimer{
+			width: 3vw;
+			height: 2.5vw;
+			margin:10px;
+
+		}
+		.btn{
+			width: 3vw;
+			height: 3vw;
+			margin:10px;
+			outline: none;
+			border: 0px;
+			color: #ffffff;
+			opacity: 0.8;
+			padding: 2px;
+		}
+		.btn:hover{
+			opacity: 1
+		}
+		.btnContainer{
+			display: flex;
+			flex-direction: row;
+			position: absolute;
+			top: 65%;
+			left: 22%;
+		}
+		.btnStart{
+			width: 21vw;
+			height: 2vw;
+			position: absolute;
+			top: 50%;
+			left: 24.5%;
+			background-color: #4287f5;
+			color:#ffffff;
+			border: 0px;
+			outline: none;
+		}
+		.btnStart:hover{
+			background-color: #659af0;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<p class="timer" id="textTimer">0:0:30</p>
+		<button class="btnStart" onclick="start()" id="start">Start</button>
+		<div class="btnContainer">
+			<input type="text" name="" id="inputTimer">
+			<button class="btn" onclick="setTiming(30)" style="background-color: #00f752">30s</button>
+			<button class="btn" onclick="setTiming(60)" style="background-color: #84f700">60s</button>
+			<button class="btn" onclick="setTiming(90)" style="background-color: #f7e700">90s</button>
+			<button class="btn" onclick="setTiming(120)" style="background-color: #f78000">120s</button>
+		</div>
+		
+		
+	</div>
+	
+
+<script type="text/javascript">
+	var timing = 10;
+	var limit = timing;
+	var run = false;
+	var tk;
+	clearInterval(tk);
+	function start() {
+		if (run==false) {
+			document.getElementById('start').innerHTML = 'stop'
+			tk = setInterval(myTimer,1000);
+			run = true;
+		}else{
+			setTiming(limit)
+		}
+
+	
+	}
+
+	function setTiming(tm) {
+		clearInterval(tk)
+		limit = tm
+		timing = tm
+		let hour = Math.floor(timing/3600)
+		let min  = Math.floor(timing/60)
+		var sec = timing;
+		if (timing<60) {
+			sec = timing
+		}else{
+			sec = timing - (60 * min)
+		}
+		document.getElementById("textTimer").innerHTML = " " +hour+" : "+min+" : "+sec
+		document.getElementById('start').innerHTML = 'start'
+		run = false
+	}
+
+	function myTimer() {
+		if (timing==0) {
+			timing = 10
+		}else{
+			timing-=1
+			let hour = Math.floor(timing/3600)
+			let min  = Math.floor(timing/60)
+			var sec = timing;
+			if (timing<60) {
+				sec = timing
+			}else{
+				sec = timing - (60 * min)
+			}
+			document.getElementById("textTimer").innerHTML = " " +hour+" : "+min+" : "+sec
+			document.title =  " " +hour+" : "+min+" : "+sec
+		}
+
+	}
+	
+</script>
+</body>
+</html>
